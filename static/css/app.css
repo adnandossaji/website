@@ -1,0 +1,94 @@
+body {
+	margin-top: 2.5em;
+}
+
+span.fui-calendar-solid, span.fui-location {
+	padding-right: 5px;
+}
+
+#contact span {
+	font-size: large;
+	float:left;
+	padding: 3px 15px 0 0;
+}
+
+.navbar-brand .fa {
+	padding-right: 5px;
+}
+
+.palette {
+	margin: 10px 0 10px 0;
+	text-transform: none;
+}
+
+#resume a {
+	color: #FFF;
+	text-decoration: underline;
+	text-transform: uppercase;
+}
+
+#resume a:hover {
+	color: #1abc9c;
+}
+
+li {
+	font-size: 16px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-transform: none;
+	padding: 5px 0 5px 0;
+}
+
+.tags {
+  list-style: none;
+  margin: 0;
+  overflow: hidden; 
+  padding: 0;
+  display: inline-flex;
+}
+
+.tags li {
+  float: left; 
+}
+
+.tags span {
+	padding: 8px;
+	font-size: 12px;
+}
+
+.tag {
+	font-size: 12px;
+    padding: 5px 10px;
+    display: inline-block;
+    position: relative;
+    margin: 0 5px 0 0;
+}
+
+#programming-languages .col-md-2, #software .col-md-2 {
+	font-size: 18px;
+}
+
+.label-info, .btn-info {
+    background-color: #1abc9c;
+	text-transform: uppercase;
+}
+
+.input-group-btn .btn-default {
+    color: #ffffff;
+    background-color: #34495E;
+}
+
+.input-group-btn .btn, .form-control {
+    border: 2px solid #34495E;
+}
+
+@media screen and (max-width: 767px) {
+	.table-responsive {
+		 border: none;
+	}
+	.form-control {
+		height: 10.5em;
+	}
+	.input-group-btn .btn {
+		padding: 77px 10px 77px 10px;
+	}
+}

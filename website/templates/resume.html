@@ -114,57 +114,28 @@
                             <p><span class="fui-calendar-solid"></span>{{ experience.start_date }} - {{ experience.end_date }}</p>
                         </div>
                     </div>
-                    <div style="color:#34495e;" class="row">
+                    {% if experience.descriptions %}
+                    <div class="col-md-12">
                         <ul>
-                            {% for acheivement in experience.acheivements %}
-                            <li>{{ acheivement }}</li>
+                            {% for description in experience.descriptions %}
+                            <li style="color:#34495e;">{{ description.description }}</li>
                             {% endfor %}
                         </ul>
                     </div>
+                    {% endif %}
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default">Technologies</span>
                         </span>
                         <div class="form-control">
                             {% for technology in experience.technologies %}
-                            <span class="tag label label-info">{{ technology }}</span>
+                            <span class="tag label label-info">{{ technology.name }}</span>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
                 {% endfor %}
 
-                {% for exp in professional_experience %}
-                <div class="palette palette-clouds">
-                    <div class="palette palette-wet-asphalt row">
-                        <div class="col-md-8">
-                            <h5 style="font-weight:bold;"><a target="_blank" href="{{ exp.url }}">{{ exp.name }}</a></h5>
-                            <p>{{ exp.title }}</p>
-                        </div>
-                        <div style="text-align: right;" class="col-md-4">
-                            <p><span style="" class="fui-location"></span>{{ exp.city }}, {{ exp.state }}</p>
-                            <p><span class="fui-calendar-solid"></span>{{ exp.start_date }} - {{ exp.end_date }}</p>
-                        </div>
-                    </div>
-                    <div style="color:#34495e;" class="row">
-                        <ul>
-                            {% for acheivement in exp.acheivements %}
-                            <li>{{ acheivement }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default">Technologies</span>
-                        </span>
-                        <div class="form-control">
-                            {% for technology in exp.technologies %}
-                            <span class="tag label label-info">{{ technology }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
 

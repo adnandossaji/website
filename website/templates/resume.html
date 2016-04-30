@@ -8,85 +8,117 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
+<div class="container">
     <div id="resume">
         <div id="contact" class="palette">
             <div style="color:#34495e;">
-                <h1>Adnan Dossaji</h1>
+                <h1>{{ user.fullname() }}</h1>
                 <div>
                     <span class="fui-star-2"></span>
-                    <h6>224 305 2717</h6>
+                    <h6>{{ user.resume.phone }}</h6>
                 </div>
                 <div>
                     <span class="fui-mail"></span>
-                    <h6>nan.dossaji@gmail.com</h6>
+                    <h6>{{ user.resume.email }}</h6>
                 </div>
                 <div>
                     <span class="fui-location"></span>
-                    <h6>711 West Gordon Terrace Apt. 321 Chicago, IL 60613</h6>
+                    <h6>{{ user.resume.get_address() }}</h6>
                 </div>
             </div>
         </div>
+
         <div id="education" class="palette">
             <div class="table-responsive">
                 <h3 style="color:#34495e;"><i class="fa fa-book" aria-hidden="true"></i> Education</h3>
+                
+                {% for school in user.resume.schools %}
                 <div class="palette palette-clouds">
                     <div class="palette palette-wet-asphalt row">
                         <div class="col-md-8">
-                            <h5 style="font-weight:bold;"><a target="_blank" href="http://www.depaul.edu">DePaul University</a></h5>
-                            <p>Bachelor of Science in Computer Science</p>
+                            <h5 style="font-weight:bold;"><a target="_blank" href="http://{{ school.url }}">{{ school.name }}</a></h5>
+                            <p>{{ school.degree }} in {{ school.field_study }}</p>
                         </div>
                         <div style="text-align: right;" class="col-md-4">
-                            <p><span style="" class="fui-location"></span>Chicago, Illinois</p>
-                            <p><span class="fui-calendar-solid"></span>Expected June 2017</p>
+                            <p><span style="" class="fui-location"></span>{{ school.city }}, {{ school.state }}</p>
+                            <p><span class="fui-calendar-solid"></span>{{ school.start_date }} - {{ school.end_date }}</p>
                         </div>
                     </div>
                     <div style="padding-bottom: 1em;" class="row">
                         <ul style="color:#34495e;">
+                            {% if school.concentration %}
                             <li>Concentration:
-                                <span class="tag label label-info">Software Engineering</span>
+                                <span class="tag label label-info">{{ school.concentration }}</span>
                             </li>
+                            {% endif %}
+                            {% if school.concentration %}
                             <li>GPA:
-                                <span class="tag label label-info">3.5</span>
+                                <span class="tag label label-info">{{ school.gpa }}</span>
                                 out of
-                                <span class="tag label label-info">4.0</span>
+                                <span class="tag label label-info">{{ school.maxgpa }}</span>
                             </li>
+                            {% endif %}
+                            {% if school.concentration %}
                             <li>Completed Courses:</li>
-                                <div class="col-md-4">
-                                    <ul>
-                                        <li>
-                                            Discreet Mathematics 1 & 2
-                                        </li>
-                                        <li>
-                                            Computer Systems 1 & 2
-                                        </li>
-                                        <li>
-                                            Mobile App Development iOS
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4">
-                                    <ul>
-                                        <li>
-                                            Object-oriented Programming 1 & 2
-                                        </li>
-                                        <li>
-                                            Data Structures 1 & 2
-                                        </li>
-                                        <li>
-                                            Object-oriented Software Engineering 1 & 2
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-4">
-                                    <ul>
-                                        <li>
-                                            Data Analysis
-                                        </li>
-                                        <li>
-                                            Technical Writing
-                                        </li>
-                                    </ul>
-                                </div>
+
+                            {% for course in school.courses %}
+                            <div class="col-md-4">
+                                <ul>
+                                    <li>
+                                        {{ course.name }}
+                                    </li>
+                                </ul>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </ul>
+                        {% if school.descriptions %}
+                        <div class="col-md-12">
+                            <ul>
+                                {% for description in school.descriptions %}
+                                <li style="color:#34495e;">{{ description.description }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <span class="btn btn-default">Technologies</span>
+                        </span>
+                        <div class="form-control">
+                            {% for technology in school.technologies %}
+                            <span class="tag label label-info">{{ technology.name }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+                
+            </div>
+        </div>
+        <div id="experience" class="palette">
+            <div class="table-responsive">
+                <h3 style="color:#34495e;"><i class="fa fa-briefcase" aria-hidden="true"></i> Professional Experience</h3>
+
+                {% for experience in user.resume.experiences %}
+                <div class="palette palette-clouds">
+                    <div class="palette palette-wet-asphalt row">
+                        <div class="col-md-8">
+                            <h5 style="font-weight:bold;"><a target="_blank" href="{{ experience.url }}">{{ experience.name }}</a></h5>
+                            <p>{{ experience.title }}</p>
+                        </div>
+                        <div style="text-align: right;" class="col-md-4">
+                            <p><span style="" class="fui-location"></span>{{ experience.city }}, {{ experience.state }}</p>
+                            <p><span class="fui-calendar-solid"></span>{{ experience.start_date }} - {{ experience.end_date }}</p>
+                        </div>
+                    </div>
+                    <div style="color:#34495e;" class="row">
+                        <ul>
+                            {% for acheivement in experience.acheivements %}
+                            <li>{{ acheivement }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="input-group">
@@ -94,57 +126,13 @@
                             <span class="btn btn-default">Technologies</span>
                         </span>
                         <div class="form-control">
-                            <span class="tag label label-info">HTML</span>
-                            <span class="tag label label-info">CSS</span>
-                            <span class="tag label label-info">JavaScript</span>
-                            <span class="tag label label-info">C</span>
-                            <span class="tag label label-info">Swift</span>
-                            <span class="tag label label-info">Java</span>
-                            <span class="tag label label-info">Python</span>
+                            {% for technology in experience.technologies %}
+                            <span class="tag label label-info">{{ technology }}</span>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-
-                <div class="palette palette-clouds">
-                    <div class="palette palette-wet-asphalt row">
-                        <div class="col-md-8">
-                            <h5 style="font-weight:bold;"><a target="_blank" href="http://www.bloc.io">Bloc</a></h5>
-                            <p>Certificate in UX/UI Design and Frontend Development</p>
-                        </div>
-                        <div style="text-align: right;" class="col-md-4">
-                            <p><span style="" class="fui-location"></span>Online</p>
-                            <p><span class="fui-calendar-solid"></span>May 2014 - June 2014</p>
-                        </div>
-                    </div>
-                    <div style="color:#34495e;" class="row">
-                        <div class="col-md-12">
-                            <ul>
-                                <li>UX/UI Design and Frontend Development courses include: conducting user research for 3
-                                    unique web and mobile projects, organizing 3 wireframes, designing 3 visual mockups, and
-                                    mocking up 3 prototypes for usability testing
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <span class="btn btn-default">Technologies</span>
-                        </span>
-                        <div class="form-control">
-                            <span class="tag label label-info">HTML</span>
-                            <span class="tag label label-info">CSS</span>
-                            <span class="tag label label-info">Adobe Photoshop</span>
-                            <span class="tag label label-info">Adobe Illustrator</span>
-                            <span class="tag label label-info">Sass</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="experience" class="palette">
-            <div class="table-responsive">
-                <h3 style="color:#34495e;"><i class="fa fa-briefcase" aria-hidden="true"></i> Professional Experience</h3>
+                {% endfor %}
 
                 {% for exp in professional_experience %}
                 <div class="palette palette-clouds">
@@ -183,7 +171,7 @@
         <div id="volunteer" class="palette">
             <div class="table-responsive">
                 <h3 style="color:#34495e;"><i class="fa fa-heart" aria-hidden="true"></i> Volunteer Experience</h3>
-                
+
                 {% for exp in volunteer_experience %}
                 <div class="palette palette-clouds">
                     <div class="palette palette-wet-asphalt row">
@@ -333,4 +321,5 @@
     {% block footer %}
         {{ super() }}
     {% endblock %}
+</div>
 {% endblock %}

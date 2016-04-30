@@ -2,7 +2,7 @@ from website import app
 from flask import render_template, request, flash, session, url_for, redirect
 from forms import ContactForm, SignupForm, SigninForm
 from flask.ext.mail import Message, Mail
-from models import db, User
+from models import *
 import datetime
 
 mail = Mail()
@@ -68,12 +68,10 @@ def signup():
   user = None
 
   if 'email' in session:
-    user = User.query.filter_by(email = session['email']).first()
+    user = Users.query.filter_by(email = session['email']).first()
+    return redirect(url_for('profile')) 
     
   form = SignupForm()
-
-  if 'email' in session:
-    return redirect(url_for('profile')) 
   
   if request.method == 'POST':
     if form.validate() == False:
@@ -248,7 +246,6 @@ def resume():
     my_list=[18,19,20,21,22,23],
     title="",
     current_time=datetime.datetime.now(),
-
     professional_experience=professional_experience,
     volunteer_experience=volunteer_experience,
     programming_languages=programming_languages,

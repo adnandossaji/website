@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="container">
   <div class="jumbo">
-    <h2>Profile<h2>
-    <h3>This is {{ user.firstname }} {{ user.lastname }}'s profile page<h3>
+    <h2>Profile</h2>
+    <h3>This is {{ user.firstname }} {{ user.lastname }}'s profile page</h3>
     <h5>Email: {{ user.email }}</h5>
   </div>
+</div>
 {% endblock %}
